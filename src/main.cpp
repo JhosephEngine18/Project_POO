@@ -10,6 +10,60 @@ Utilizare la siguiente nomenclatura:
 #include <iostream>
 #include <vector>
 
+class Capsule
+{
+private:
+	std::string Name;
+	//Healing = 1, Ki Recover = 2
+	std::string Type;
+	int Duration;
+
+public:
+
+	Capsule(std::string capsuleName, int capsuleType, int capsuleDuration)
+	{
+		Name = capsuleName;
+
+		switch (capsuleType)
+		{
+		case 1:
+			Type = "Healing";
+			break;
+		case 2:
+			Type = "Energy";
+		default:
+			Type = "Unknown";
+			break;
+		}
+		Duration = capsuleDuration;
+	}
+
+	//This is only to prints the properties of the capsule
+	void ShowData()
+	{
+		std::cout << "Capsule: " << Name + "\n";
+		std::cout << "Type: " << Type << "\n";
+		std::cout << "Duration: " << Duration << "s" << "\n";
+	}
+
+	void GetInventoryData()
+	{
+		std::cout << "Capsule: " << Name + "\n";
+		std::cout << "Type: " << Type << "\n";
+		std::cout << "Duration: " << Duration << "s" << "\n";
+		std::cout << "----------------------------------------------\n";
+	}
+	//This returns the name of the capsule referenced
+	std::string GetCapsuleName()
+	{
+		return Name;
+	}
+	//This function returns the type of capsule
+	std::string GetCapsuleType()
+	{
+		return Type;
+	}
+};
 
 class Character
 {
@@ -23,6 +77,9 @@ private:
 	int kiBlastDamage;
 	int beamDamage;
 	int specialAttackDamage;
+
+	//Secondary properties
+	std::vector<Capsule> inventory;
 
 public:
 	//Constructor that initializes the variable playerName
@@ -45,6 +102,40 @@ public:
 			return "Character name not assigned";
 		}
 		return characterName;
+	}
+
+	//Adds the object at the beginning of the vector
+	void AddToInventory(Capsule item)
+	{
+		inventory.push_back(item);
+	}
+
+	//Method that shows in console all the items inside of the vector
+	void Showinventory()
+	{
+		if (inventory.size() < 1)
+		{
+			system("cls");
+			std::cout << "You dont have any item in your inventory" << std::endl;
+			std::cout << "PRESS ENTER TO GO BACK TO THE MENU" << std::endl;
+		}
+		else
+		{
+			system("cls");
+			for (int i = 0; i < inventory.size(); i++)
+			{
+				inventory[i].GetInventoryData();
+			}
+			std::cout << "PRESS ENTER TO GO BACK TO THE MENU" << std::endl;
+		}
+		std::cin.get();
+		system("cls");
+	}
+
+	//Gets the vectors size
+	int GetInventorySize()
+	{
+		return inventory.size();
 	}
 
 	//Returns the current life of the character
@@ -71,6 +162,16 @@ public:
 		return specialAttackDamage;
 	}
 
+};
+
+class Player : public Character
+{
+private:
+	int zeni;
+public:
+	//Constructor that initializes the variables
+	Player(std::string name, int life, int ki, int kiBlast, int beam, int specialAttack) : 
+	Character(name, life, ki, kiBlast, beam, specialAttack){}
 };
 
 
