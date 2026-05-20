@@ -269,9 +269,13 @@ public:
     }
 
     int GetLevel()
-
     {
         return Level;
+    }
+
+    void GainZeni(int value)
+    {
+        Zeni += value;
     }
 
 };
@@ -642,7 +646,7 @@ void CombatDecision(std::string Text)
         Player.PrintLife();
         Player.PrintKi();
         Player.GetStamina();
-        std::cout << "Player Level: " << Player.GetLevel();
+        std::cout << "Player Level: " << Player.GetLevel() << "\n\n";
         std::cout << "Cooler's Life: " << Cooler.GetLife() << "\n\n";
         std::cout << "Cooler's Level: " << Cooler.GetLevel() << "\n\n";
         
@@ -986,6 +990,7 @@ void HandleEnding()
         std::cout << "//Press Enter to Continue//\n";
         std::cin.get();
         Player.LevelUp(50);
+        Player.GainZeni(200);
     }
     //Special Endings
     else if (Player.GetLife() >= 35 && Cooler.GetLife() <= 0) //Final Saiyan Race
@@ -1033,6 +1038,7 @@ void HandleEnding()
             std::cout << "//Press Enter to Continue//\n";
             std::cin.ignore();
             std::cin.get();
+            Player.GainZeni(300);
             system("cls");
         }
         else if (Race == 2) //Final Namekian Race
@@ -1077,6 +1083,7 @@ void HandleEnding()
             std::cout << "//Press Enter to Continue//\n";
             std::cin.ignore();
             std::cin.get();
+            Player.GainZeni(300);
             system("cls");
         }
         else if (Race == 3) //Final Freezer Race
@@ -1127,9 +1134,11 @@ void HandleEnding()
         system("COLOR 0F");
         textVariable = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
         Player.LevelUp(100);
+        
         TextBox(textVariable);
         std::cout << "//Press Enter to Continue//\n";
         std::cin.get();
+        Player.GainZeni(300);
 
     }
     //Bad Ending
@@ -1140,6 +1149,7 @@ void HandleEnding()
         Cooler.EnemyPowerUp();
         std::cout << "//Press Enter to Continue//\n";
         std::cin.get();
+        Player.GainZeni(100);
     }
 
 }
@@ -1220,7 +1230,6 @@ int main()
         }
         
         HandleEnding();
-
         //This indicates the end of the game
         TextBox("Do you want to try again? Y = 1 / N = AnyValue");
         std::cin >> Decision;
@@ -1234,6 +1243,7 @@ int main()
             {
                 Cooler.SetLife(180);
             }
+            CapsuleStore.BuyCapsule(Player);
         }
         else
         {
