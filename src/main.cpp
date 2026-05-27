@@ -637,7 +637,7 @@ void OpenInventory(Character &targetPlayer)
 }
 
 //This function automates the way of the selection boxes for actions are structured and its parameter is to keep the actual context of the game.
-void CombatDecision(std::string Text)
+void CombatDecision(std::string text)
 {
     bool Loop = true;
     while (Loop)
@@ -650,7 +650,7 @@ void CombatDecision(std::string Text)
         std::cout << "Cooler's Life: " << Cooler.GetLife() << "\n\n";
         std::cout << "Cooler's Level: " << Cooler.GetLevel() << "\n\n";
         
-        TextBox(Text);
+        TextBox(text);
         TextBox("What do you want to do?");
         SpecialTextBox("1-Attack");
         SpecialTextBox("2-Attack from a distance");
@@ -690,7 +690,7 @@ void CombatDecision(std::string Text)
 }
 
 //This function is called for the end of the story, specifically for special endings
-void FinalDecision(std::string Text)
+void FinalDecision(std::string text)
 {
     bool Loop = true;
     while (Loop)
@@ -700,7 +700,7 @@ void FinalDecision(std::string Text)
         Player.PrintKi();
         Player.GetStamina();
         
-        TextBox(Text);
+        TextBox(text);
         TextBox("What will you do?");
         SpecialTextBox("1-Combo Attack");
         SpecialTextBox("2-Super Ki Attack");
@@ -977,7 +977,7 @@ void HandleEnding()
     // Final SCENE
     
     //Good Ending
-    if (Player.GetLife() > 45 && Cooler.GetLife() <= 0)
+    if (Player.GetLife() >= 45 && Cooler.GetLife() <= 0)
     {
         textVariable = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies disintegrated";
         TextBox(textVariable);
@@ -993,7 +993,7 @@ void HandleEnding()
         Player.GainZeni(200);
     }
     //Special Endings
-    else if (Player.GetLife() >= 35 && Cooler.GetLife() <= 0) //Final Saiyan Race
+    else if (Player.GetLife() >= 35 && Player.GetLife() < 45 && Cooler.GetLife() <= 0) //Final Saiyan Race
     {
         if (Race == 1)
         {
@@ -1142,7 +1142,7 @@ void HandleEnding()
 
     }
     //Bad Ending
-    else if (Player.GetLife() <= 30)
+    else if (Player.GetLife() < 35)
     {
         textVariable = "You tried everything you could to defeat him... But that was not enough... You lost against Cooler making him go stronger, making Goku lost against Freezer and his brother, corrupting the timeline....";
         TextBox(textVariable);
