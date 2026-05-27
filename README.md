@@ -22,5 +22,5 @@ Tienes que crear un archivo .cpp para copiar el codigo y pegarlo en Visual Studi
 
 ### Los controles apareceran en consola, pero en caso de que no te percatez de ello aqui estan los controles:
 
-- Los numeros del 0 al 6
-- Enter
+- Los numeros del 0 al 6 para elegir las opciones
+- Enter para seleccionar la opcion que elegiste

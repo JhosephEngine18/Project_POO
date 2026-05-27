@@ -975,7 +975,53 @@ void CinematicScene3()
 void HandleEnding()
 {
     // Final SCENE
-    
+
+    //Secret Ending
+    if (Player.GetLevel() >= 3 && Cooler.GetLife() <= 0)
+    {
+        system("COLOR 0B");
+        textVariable = "Cooler falls defeated... but something is different this time.";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+        system("cls");
+
+        textVariable = "The Supreme Kai of Time appears before you. She has been watching your battles closely.";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+        system("cls");
+
+        textVariable = "Supreme Kai of Time: 'Your power has grown far beyond what we expected from a rookie patroller...'";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+        system("cls");
+
+        textVariable = "She opens a rift in time and points at it. 'There is a distortion even greater than this one threatening the timeline.'";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+        system("cls");
+
+        textVariable = "She hands you a golden time crystal. 'Only an Elite Patroller can handle what comes next. You have earned this rank.'";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+        system("cls");
+
+        system("COLOR 0F");
+        textVariable = "||| ELITE PATROLLER ENDING |||";
+        TextBox(textVariable);
+        textVariable = "You have been promoted to Elite Time Patroller. The timeline is safe, and a greater mission awaits you.";
+        TextBox(textVariable);
+        std::cout << "//Press Enter to Continue//\n";
+        std::cin.get();
+
+        Player.LevelUp(200);
+        Player.GainZeni(500);
+        return;
+    }
     //Good Ending
     if (Player.GetLife() >= 45 && Cooler.GetLife() <= 0)
     {
@@ -1038,7 +1084,6 @@ void HandleEnding()
             std::cout << "//Press Enter to Continue//\n";
             std::cin.ignore();
             std::cin.get();
-            Player.GainZeni(300);
             system("cls");
         }
         else if (Race == 2) //Final Namekian Race
@@ -1083,7 +1128,6 @@ void HandleEnding()
             std::cout << "//Press Enter to Continue//\n";
             std::cin.ignore();
             std::cin.get();
-            Player.GainZeni(300);
             system("cls");
         }
         else if (Race == 3) //Final Freezer Race
